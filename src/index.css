@@ -1,5 +1,28 @@
 @import 'tailwindcss';
 
+@theme {
+  --font-sans: 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: #eff9fa;
+  --color-brand-100: #d7f0f2;
+  --color-brand-200: #b3e2e7;
+  --color-brand-300: #7ecdd6;
+  --color-brand-400: #42afbe;
+  --color-brand-500: #2593a3;
+  --color-brand-600: #1c7787;
+  --color-brand-700: #1c606e;
+  --color-brand-800: #1e4f5b;
+  --color-brand-900: #1d434d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  @apply bg-slate-50;
+  @apply bg-brand-50 text-slate-800 antialiased;
+}
+
+:focus-visible {
+  @apply outline-brand-500 outline-2 outline-offset-2;
 }

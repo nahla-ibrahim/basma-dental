@@ -31,7 +31,7 @@ export function ServiceCard({ name, description, icon, price, durationMin }: Ser
 
   return (
     <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+      <div className="bg-brand-50 text-brand-700 mb-4 flex size-12 items-center justify-center rounded-lg">
         <Icon className="size-6" aria-hidden="true" />
       </div>
 
@@ -40,7 +40,7 @@ export function ServiceCard({ name, description, icon, price, durationMin }: Ser
 
       <div className="mt-4 flex justify-between border-t border-slate-100 pt-3 text-sm text-slate-600">
         <span>{durationMin} دقيقة</span>
-        <span className="font-semibold text-teal-700">{price} ج.م</span>
+        <span className="text-brand-700 font-semibold">{price} ج.م</span>
       </div>
     </article>
   )
