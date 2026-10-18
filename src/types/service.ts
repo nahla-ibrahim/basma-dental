@@ -8,6 +8,7 @@ export type Service = {
   descriptionAr: string
   descriptionEn: string
   icon: ServiceIcon
+  imageUrl: string
   durationMin: number
   price: number
   active: boolean
