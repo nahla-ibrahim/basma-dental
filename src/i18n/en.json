@@ -1,5 +1,8 @@
 {
-  "brand": "Mawid",
+  "brand": "Basma",
+  "meta": {
+    "title": "Basma Dental"
+  },
   "header": {
     "nav": "Main navigation",
     "services": "Services",

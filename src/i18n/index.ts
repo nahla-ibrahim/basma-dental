@@ -12,6 +12,7 @@ const resources = {
 function updateDocument(language: string) {
   document.documentElement.lang = language
   document.documentElement.dir = i18n.dir(language)
+  document.title = i18n.t('meta.title')
 }
 
 i18n.on('languageChanged', updateDocument)
@@ -26,7 +27,7 @@ i18n
 
     detection: {
       order: ['localStorage'],
-      lookupLocalStorage: 'mawid-language',
+      lookupLocalStorage: 'basma-language',
       caches: ['localStorage'],
     },
     interpolation: {

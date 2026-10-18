@@ -1,4 +1,4 @@
-import { CalendarCheck } from 'lucide-react'
+import { Smile } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from './LanguageSwitcher'
 
@@ -13,7 +13,7 @@ export function Header() {
       >
         <a href="#top" className="flex items-center gap-2">
           <span className="flex size-9 items-center justify-center rounded-xl bg-brand-600 text-white">
-            <CalendarCheck className="size-5" aria-hidden="true" />
+            <Smile className="size-5" aria-hidden="true" />
           </span>
           <span className="text-xl font-bold text-brand-800">{t('brand')}</span>
         </a>
