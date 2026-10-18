@@ -1,42 +1,32 @@
-import { useEffect, useState } from 'react'
-import { apiClient } from '../lib/apiClient'
-import type { Service } from '../types/service'
+import { useQuery } from '@tanstack/react-query'
+import { servicesQuery } from '../api/services'
 import { ServiceCard } from './ServiceCard'
 
 export function ServicesList() {
-  const [services, setServices] = useState<Service[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
+  const { data: services, isPending, isError, refetch } = useQuery(servicesQuery)
 
-  useEffect(() => {
-    let ignore = false
-
-    apiClient
-      .get<Service[]>('/services')
-      .then((data) => {
-        if (!ignore) setServices(data)
-      })
-      .catch(() => {
-        if (!ignore) setHasError(true)
-      })
-      .finally(() => {
-        if (!ignore) setIsLoading(false)
-      })
-
-    return () => {
-      ignore = true
-    }
-  }, [])
-
-  if (isLoading) {
-    return <p className="text-center text-slate-500">جاري التحميل...</p>
+  if (isPending) {
+    return (
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true">
+        {Array.from({ length: 6 }, (_, i) => (
+          <div key={i} className="h-52 animate-pulse rounded-xl bg-slate-200" />
+        ))}
+      </div>
+    )
   }
 
-  if (hasError) {
+  if (isError) {
     return (
-      <p role="alert" className="text-center text-red-600">
-        حصلت مشكلة في تحميل الخدمات
-      </p>
+      <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+        <p className="text-red-700">حصلت مشكلة في تحميل الخدمات</p>
+        <button
+          type="button"
+          onClick={() => refetch()}
+          className="mt-4 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+        >
+          حاول تاني
+        </button>
+      </div>
     )
   }
 
