@@ -1,0 +1,27 @@
+{
+  "brand": "Mawid",
+  "header": {
+    "nav": "Main navigation",
+    "services": "Services",
+    "book": "Book now",
+    "switchLanguageLabel": "التحويل للعربية"
+  },
+  "hero": {
+    "badge": "Complete dental care",
+    "titleLine1": "Your smile deserves",
+    "titleLine2": "the best care",
+    "description": "An expert team and modern equipment. Book your visit online in under a minute, with no calls and no waiting.",
+    "book": "Book now",
+    "explore": "Explore our services",
+    "imageAlt": "A dentist talking with a patient in the clinic",
+    "onlineTitle": "Online booking",
+    "onlineSubtitle": "Pick your time in seconds"
+  },
+  "services": {
+    "title": "Our services",
+    "error": "Something went wrong while loading services",
+    "retry": "Try again",
+    "empty": "No services are available right now",
+    "duration": "{{value, number}} min"
+  }
+}

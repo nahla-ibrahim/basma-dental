@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { servicesQuery } from '../api/services'
 import { ServiceCard } from './ServiceCard'
 
 export function ServicesList() {
+  const { t, i18n } = useTranslation()
   const { data: services, isPending, isError, refetch } = useQuery(servicesQuery)
+  const isArabic = i18n.language === 'ar'
 
   if (isPending) {
     return (
@@ -25,20 +28,20 @@ export function ServicesList() {
   if (isError) {
     return (
       <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
-        <p className="text-red-700">حصلت مشكلة في تحميل الخدمات</p>
+        <p className="text-red-700">{t('services.error')}</p>
         <button
           type="button"
           onClick={() => refetch()}
           className="mt-4 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
         >
-          حاول تاني
+          {t('services.retry')}
         </button>
       </div>
     )
   }
 
   if (services.length === 0) {
-    return <p className="text-center text-slate-500">مفيش خدمات متاحة دلوقتي</p>
+    return <p className="text-center text-slate-500">{t('services.empty')}</p>
   }
 
   return (
@@ -46,8 +49,8 @@ export function ServicesList() {
       {services.map((service) => (
         <ServiceCard
           key={service.id}
-          name={service.nameAr}
-          description={service.descriptionAr}
+          name={isArabic ? service.nameAr : service.nameEn}
+          description={isArabic ? service.descriptionAr : service.descriptionEn}
           icon={service.icon}
           imageUrl={service.imageUrl}
           price={service.price}

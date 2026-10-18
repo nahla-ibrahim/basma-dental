@@ -5,6 +5,7 @@ import '@fontsource/ibm-plex-sans-arabic/700.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
+import './i18n'
 import './index.css'
 
 // Start the mock API before rendering, so the first request is already mocked

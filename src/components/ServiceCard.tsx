@@ -8,6 +8,7 @@ import {
   Toothbrush,
   type LucideIcon,
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import type { ServiceIcon } from '../types/service'
 
 const icons: Record<ServiceIcon, LucideIcon> = {
@@ -36,10 +37,16 @@ export function ServiceCard({
   price,
   durationMin,
 }: ServiceCardProps) {
+  const { t, i18n } = useTranslation()
   const Icon = icons[icon]
+  const formattedPrice = new Intl.NumberFormat(i18n.language, {
+    style: 'currency',
+    currency: 'EGP',
+    maximumFractionDigits: 0,
+  }).format(price)
 
   return (
-    <article className="group hover:shadow-brand-900/10 flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10">
       <div className="aspect-[8/5] overflow-hidden">
         <img
           src={imageUrl}
@@ -52,7 +59,7 @@ export function ServiceCard({
       </div>
 
       <div className="relative flex flex-1 flex-col p-5 pt-9">
-        <span className="from-brand-500 to-brand-700 absolute start-5 -top-7 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-lg ring-4 ring-white">
+        <span className="absolute start-5 -top-7 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg ring-4 ring-white">
           <Icon className="size-7" aria-hidden="true" />
         </span>
 
@@ -64,9 +71,9 @@ export function ServiceCard({
         <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4 text-sm">
           <span className="flex items-center gap-1.5 text-slate-500">
             <Clock className="size-4" aria-hidden="true" />
-            {durationMin} دقيقة
+            {t('services.duration', { value: durationMin })}
           </span>
-          <span className="text-brand-700 text-base font-bold">{price} ج.م</span>
+          <span className="text-base font-bold text-brand-700">{formattedPrice}</span>
         </div>
       </div>
     </article>
