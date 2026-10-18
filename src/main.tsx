@@ -10,7 +10,17 @@ import './index.css'
 // Start the mock API before rendering, so the first request is already mocked
 async function enableMocking() {
   const { worker } = await import('./mocks/browser')
-  await worker.start({ onUnhandledFrame: 'bypass' })
+  const options = { onUnhandledFrame: 'bypass' } as const
+
+  await worker.start(options)
+
+  // The browser stops idle service workers, and MSW then forgets this tab.
+  // Restart mocking whenever the tab becomes visible again.
+  document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState !== 'visible') return
+    await worker.stop()
+    await worker.start(options)
+  })
 }
 
 enableMocking().then(() => {
