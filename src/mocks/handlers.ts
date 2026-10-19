@@ -1,4 +1,5 @@
 import { delay, http, HttpResponse } from 'msw'
+import type { Doctor } from '../types/doctor'
 import type { Service } from '../types/service'
 
 const services: Service[] = [
@@ -76,9 +77,49 @@ const services: Service[] = [
   },
 ]
 
+const doctors: Doctor[] = [
+  {
+    id: 'd1',
+    nameAr: 'د. أحمد سامي',
+    nameEn: 'Dr. Ahmed Samy',
+    specialtyAr: 'طب أسنان عام',
+    specialtyEn: 'General dentistry',
+    serviceIds: ['s1', 's2', 's3', 's6'],
+  },
+  {
+    id: 'd2',
+    nameAr: 'د. منى الشريف',
+    nameEn: 'Dr. Mona El-Sherif',
+    specialtyAr: 'تجميل الأسنان',
+    specialtyEn: 'Cosmetic dentistry',
+    serviceIds: ['s1', 's2', 's3', 's5'],
+  },
+  {
+    id: 'd3',
+    nameAr: 'د. كريم عادل',
+    nameEn: 'Dr. Karim Adel',
+    specialtyAr: 'علاج الجذور والأعصاب',
+    specialtyEn: 'Endodontics',
+    serviceIds: ['s1', 's3', 's4'],
+  },
+  {
+    id: 'd4',
+    nameAr: 'د. سارة حسن',
+    nameEn: 'Dr. Sara Hassan',
+    specialtyAr: 'جراحة الفم والأسنان',
+    specialtyEn: 'Oral surgery',
+    serviceIds: ['s1', 's4', 's6'],
+  },
+]
+
 export const handlers = [
   http.get('/api/services', async () => {
     await delay()
     return HttpResponse.json(services)
+  }),
+
+  http.get('/api/doctors', async () => {
+    await delay()
+    return HttpResponse.json(doctors)
   }),
 ]

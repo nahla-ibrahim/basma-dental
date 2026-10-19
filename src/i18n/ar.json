@@ -26,5 +26,38 @@
     "retry": "حاول تاني",
     "empty": "مفيش خدمات متاحة دلوقتي",
     "duration": "{{value, number}} دقيقة"
+  },
+  "booking": {
+    "title": "احجز موعدك",
+    "subtitle": "اختار الخدمة والدكتور والميعاد اللي يناسبك في أقل من دقيقة.",
+    "steps": {
+      "label": "خطوات الحجز",
+      "service": "الخدمة",
+      "time": "الميعاد",
+      "details": "بياناتك"
+    },
+    "serviceStep": {
+      "title": "اختار الخدمة والدكتور"
+    },
+    "service": "الخدمة",
+    "servicePlaceholder": "اختار خدمة",
+    "doctor": "الدكتور",
+    "doctorPlaceholder": "اختار دكتور",
+    "doctorNeedsService": "اختار الخدمة الأول",
+    "anyDoctor": "أي دكتور متاح",
+    "loading": "جاري التحميل...",
+    "next": "التالي",
+    "error": "حصلت مشكلة في تحميل البيانات",
+    "retry": "حاول تاني",
+    "summary": {
+      "title": "ملخص الحجز",
+      "service": "الخدمة",
+      "doctor": "الدكتور",
+      "date": "اليوم",
+      "time": "الميعاد",
+      "duration": "المدة",
+      "total": "الإجمالي",
+      "notSelected": "لسه ماتحددش"
+    }
   }
 }

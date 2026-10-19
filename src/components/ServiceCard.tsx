@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { formatPrice } from '../lib/format'
 import type { ServiceIcon } from '../types/service'
 
 const icons: Record<ServiceIcon, LucideIcon> = {
@@ -39,11 +40,7 @@ export function ServiceCard({
 }: ServiceCardProps) {
   const { t, i18n } = useTranslation()
   const Icon = icons[icon]
-  const formattedPrice = new Intl.NumberFormat(i18n.language, {
-    style: 'currency',
-    currency: 'EGP',
-    maximumFractionDigits: 0,
-  }).format(price)
+  const formattedPrice = formatPrice(price, i18n.language)
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10">

@@ -26,5 +26,38 @@
     "retry": "Try again",
     "empty": "No services are available right now",
     "duration": "{{value, number}} min"
+  },
+  "booking": {
+    "title": "Book your appointment",
+    "subtitle": "Choose your service, dentist and a time that suits you in under a minute.",
+    "steps": {
+      "label": "Booking steps",
+      "service": "Service",
+      "time": "Time",
+      "details": "Your details"
+    },
+    "serviceStep": {
+      "title": "Choose a service and dentist"
+    },
+    "service": "Service",
+    "servicePlaceholder": "Select a service",
+    "doctor": "Dentist",
+    "doctorPlaceholder": "Select a dentist",
+    "doctorNeedsService": "Choose a service first",
+    "anyDoctor": "Any available dentist",
+    "loading": "Loading...",
+    "next": "Next",
+    "error": "Something went wrong while loading the data",
+    "retry": "Try again",
+    "summary": {
+      "title": "Booking summary",
+      "service": "Service",
+      "doctor": "Dentist",
+      "date": "Date",
+      "time": "Time",
+      "duration": "Duration",
+      "total": "Total",
+      "notSelected": "Not selected yet"
+    }
   }
 }
