@@ -58,6 +58,20 @@
       "duration": "Duration",
       "total": "Total",
       "notSelected": "Not selected yet"
-    }
+    },
+    "timeStep": {
+      "title": "Choose a day and time",
+      "days": "Available days",
+      "times": "Available times",
+      "today": "Today",
+      "closed": "Full",
+      "pickDay": "Pick a day to see the available times",
+      "noSlots": "No free times on this day, try another one"
+    },
+    "detailsStep": {
+      "title": "Your details"
+    },
+    "back": "Back",
+    "confirm": "Confirm booking"
   }
 }

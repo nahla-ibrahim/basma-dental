@@ -8,7 +8,6 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 60_000,
       retry: 1,
-      // Only this user changes the mock data, so refetching on tab focus adds nothing
       refetchOnWindowFocus: false,
     },
   },

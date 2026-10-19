@@ -27,7 +27,6 @@ body {
   @apply outline-2 outline-offset-2 outline-brand-500;
 }
 
-/* Tailwind v4 resets buttons to the default cursor, so bring the pointer back */
 button:not(:disabled) {
   cursor: pointer;
 }

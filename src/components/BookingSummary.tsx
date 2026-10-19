@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import { formatPrice } from '../lib/format'
+import { formatDate, formatPrice, formatTime } from '../lib/format'
+import type { DoctorSlot } from '../lib/slots'
 import type { Doctor } from '../types/doctor'
 import type { Service } from '../types/service'
 
@@ -7,9 +8,10 @@ type BookingSummaryProps = {
   service?: Service
   doctor?: Doctor
   isAnyDoctor: boolean
+  slot: DoctorSlot | null
 }
 
-export function BookingSummary({ service, doctor, isAnyDoctor }: BookingSummaryProps) {
+export function BookingSummary({ service, doctor, isAnyDoctor, slot }: BookingSummaryProps) {
   const { t, i18n } = useTranslation()
   const isArabic = i18n.language === 'ar'
   const notSelected = <span className="text-slate-400">{t('booking.summary.notSelected')}</span>
@@ -24,8 +26,8 @@ export function BookingSummary({ service, doctor, isAnyDoctor }: BookingSummaryP
       value: service && (isArabic ? service.nameAr : service.nameEn),
     },
     { label: t('booking.summary.doctor'), value: doctorName },
-    { label: t('booking.summary.date'), value: undefined },
-    { label: t('booking.summary.time'), value: undefined },
+    { label: t('booking.summary.date'), value: slot && formatDate(slot.start, i18n.language) },
+    { label: t('booking.summary.time'), value: slot && formatTime(slot.start, i18n.language) },
     {
       label: t('booking.summary.duration'),
       value: service && t('services.duration', { value: service.durationMin }),
