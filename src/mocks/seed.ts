@@ -126,6 +126,14 @@ export const seedWorkingHours: WorkingHours[] = [
 
 export const DEMO_USER_ID = 'u-demo'
 
+const demoPatients = [
+  { name: 'Omar Khaled', phone: '01012345678', email: 'omar@example.com' },
+  { name: 'Nour Ali', phone: '01123456789', email: 'nour@example.com' },
+  { name: 'Youssef Hany', phone: '01234567890', email: 'youssef@example.com' },
+  { name: 'Salma Tarek', phone: '01534567891', email: 'salma@example.com' },
+  { name: 'Mariam Adel', phone: '01045678912', email: 'mariam@example.com' },
+]
+
 export function createSeedBookings(today: Date): Booking[] {
   const bookings: Booking[] = []
 
@@ -138,11 +146,16 @@ export function createSeedBookings(today: Date): Booking[] {
         const startsAt = set(day, { hours: hour })
         const endsAt = set(day, { hours: hour + 1 })
 
+        const patient = demoPatients[(dayOffset + doctorIndex + index) % demoPatients.length]
+
         bookings.push({
           id: `b-${dayOffset}-${doctor.id}-${index}`,
           serviceId: doctor.serviceIds[0],
           doctorId: doctor.id,
           userId: DEMO_USER_ID,
+          patientName: patient.name,
+          patientPhone: patient.phone,
+          patientEmail: patient.email,
           startsAt: startsAt.toISOString(),
           endsAt: endsAt.toISOString(),
           status: 'confirmed',

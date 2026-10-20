@@ -4,7 +4,10 @@ export type Booking = {
   id: string
   serviceId: string
   doctorId: string
-  userId: string
+  userId: string | null
+  patientName: string
+  patientPhone: string
+  patientEmail: string
   startsAt: string
   endsAt: string
   status: BookingStatus
@@ -12,3 +15,8 @@ export type Booking = {
 }
 
 export type BookingTime = Pick<Booking, 'doctorId' | 'startsAt' | 'endsAt' | 'status'>
+
+export type CreateBookingInput = Pick<
+  Booking,
+  'serviceId' | 'doctorId' | 'startsAt' | 'patientName' | 'patientPhone' | 'patientEmail' | 'notes'
+>

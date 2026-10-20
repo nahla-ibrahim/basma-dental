@@ -69,9 +69,34 @@
       "noSlots": "No free times on this day, try another one"
     },
     "detailsStep": {
-      "title": "Your details"
+      "title": "Your details",
+      "name": "Name",
+      "namePlaceholder": "Full name",
+      "phone": "Mobile number",
+      "email": "Email",
+      "notes": "Notes",
+      "notesPlaceholder": "Anything you'd like the dentist to know",
+      "optional": "optional"
     },
     "back": "Back",
-    "confirm": "Confirm booking"
+    "confirm": "Confirm booking",
+    "validation": {
+      "required": "This field is required",
+      "nameTooShort": "Name must be at least 3 characters",
+      "invalidPhone": "Enter a valid Egyptian mobile number, like 01012345678",
+      "invalidEmail": "Enter a valid email",
+      "notesTooLong": "Notes must be under 300 characters"
+    },
+    "submitting": "Booking...",
+    "submitError": "Something went wrong and the booking wasn't saved, please try again",
+    "slotTaken": "Sorry, this time was just booked. Please pick another one.",
+    "pickAnotherTime": "Pick another time",
+    "confirmation": {
+      "title": "Your booking is in!",
+      "message": "Your booking is waiting for the clinic's confirmation. We'll contact you on {{phone}}.",
+      "status": "Status",
+      "pending": "Pending confirmation",
+      "bookAnother": "Book another appointment"
+    }
   }
 }

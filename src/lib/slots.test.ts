@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { Booking } from '../types/booking'
+import type { BookingTime } from '../types/booking'
 import type { WorkingHours } from '../types/workingHours'
 import { getAnyDoctorSlots, getAvailableSlots } from './slots'
 
@@ -13,12 +13,9 @@ const workingHours: WorkingHours[] = [
   { day: 5, open: '09:00', close: '12:00', closed: true },
 ]
 
-function booking(start: Date, end: Date, overrides: Partial<Booking> = {}): Booking {
+function booking(start: Date, end: Date, overrides: Partial<BookingTime> = {}): BookingTime {
   return {
-    id: crypto.randomUUID(),
-    serviceId: 's1',
     doctorId: 'd1',
-    userId: 'u1',
     startsAt: start.toISOString(),
     endsAt: end.toISOString(),
     status: 'confirmed',

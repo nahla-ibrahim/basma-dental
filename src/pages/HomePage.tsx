@@ -1,22 +1,40 @@
-import { useQuery } from '@tanstack/react-query'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { addDays, format, startOfDay } from 'date-fns'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { busyTimesQuery } from '../api/bookings'
+import { busyTimesQuery, createBooking } from '../api/bookings'
 import { doctorsQuery } from '../api/doctors'
 import { servicesQuery } from '../api/services'
 import { workingHoursQuery } from '../api/workingHours'
+import { BookingConfirmation } from '../components/BookingConfirmation'
+import { BookingDetailsForm } from '../components/BookingDetailsForm'
 import { BookingSteps } from '../components/BookingSteps'
 import { BookingSummary } from '../components/BookingSummary'
 import { DayPicker, type DayOption } from '../components/DayPicker'
 import { Select } from '../components/Select'
 import { TimeSlots } from '../components/TimeSlots'
+import { ApiError } from '../lib/apiClient'
+import { bookingDetailsSchema, type BookingDetails } from '../lib/bookingSchema'
 import { getAnyDoctorSlots, getAvailableSlots, type DoctorSlot } from '../lib/slots'
+import type { Booking } from '../types/booking'
 
 const ANY_DOCTOR = 'any'
 const LAST_STEP = 2
 const BOOKING_DAYS = 14
+const DETAILS_FORM_ID = 'booking-details-form'
+
+const primaryButtonClassName =
+  'inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/25 transition-colors hover:bg-brand-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none'
+
+const emptyDetails: BookingDetails = {
+  patientName: '',
+  patientPhone: '',
+  patientEmail: '',
+  notes: '',
+}
 
 export function HomePage() {
   const { t, i18n } = useTranslation()
@@ -36,6 +54,24 @@ export function HomePage() {
   const [doctorId, setDoctorId] = useState('')
   const [dayKey, setDayKey] = useState<string | null>(null)
   const [slot, setSlot] = useState<DoctorSlot | null>(null)
+  const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null)
+
+  const queryClient = useQueryClient()
+  const detailsForm = useForm<BookingDetails>({
+    resolver: zodResolver(bookingDetailsSchema),
+    defaultValues: emptyDetails,
+    mode: 'onTouched',
+  })
+
+  const bookingMutation = useMutation({
+    mutationFn: createBooking,
+    onSuccess: (booking) => {
+      queryClient.invalidateQueries({ queryKey: ['bookings'] })
+      setConfirmedBooking(booking)
+    },
+  })
+  const isSlotTaken =
+    bookingMutation.error instanceof ApiError && bookingMutation.error.status === 409
 
   const stepHeadingRef = useRef<HTMLHeadingElement>(null)
   const hasChangedStep = useRef(false)
@@ -83,7 +119,7 @@ export function HomePage() {
   const isStepTwoLoading = workingHoursResult.isPending || busyResult.isPending
   const isStepTwoError = workingHoursResult.isError || busyResult.isError
 
-  const canGoNext = [Boolean(serviceId && doctorId), Boolean(slot), false][step]
+  const canGoNext = [Boolean(serviceId && doctorId), Boolean(slot)][step]
 
   const stepTitles = [
     t('booking.serviceStep.title'),
@@ -118,6 +154,46 @@ export function HomePage() {
   function handleDayChange(newDayKey: string) {
     setDayKey(newDayKey)
     setSlot(null)
+  }
+
+  function submitBooking(details: BookingDetails) {
+    if (!slot) return
+
+    bookingMutation.mutate({
+      ...details,
+      notes: details.notes || undefined,
+      serviceId,
+      doctorId: slot.doctorId,
+      startsAt: slot.start.toISOString(),
+    })
+  }
+
+  function pickAnotherTime() {
+    bookingMutation.reset()
+    queryClient.invalidateQueries({ queryKey: ['bookings'] })
+    setSlot(null)
+    goToStep(1)
+  }
+
+  function startOver() {
+    setConfirmedBooking(null)
+    bookingMutation.reset()
+    detailsForm.reset(emptyDetails)
+    handleServiceChange('')
+    setStep(0)
+  }
+
+  if (confirmedBooking) {
+    return (
+      <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
+        <BookingConfirmation
+          booking={confirmedBooking}
+          service={services.find((service) => service.id === confirmedBooking.serviceId)}
+          doctor={doctorsResult.data?.find((doctor) => doctor.id === confirmedBooking.doctorId)}
+          onBookAnother={startOver}
+        />
+      </main>
+    )
   }
 
   return (
@@ -214,6 +290,31 @@ export function HomePage() {
               </div>
             ))}
 
+          {step === 2 && (
+            <>
+              <BookingDetailsForm
+                id={DETAILS_FORM_ID}
+                form={detailsForm}
+                onSubmit={submitBooking}
+              />
+
+              {bookingMutation.isError && (
+                <div role="alert" className="mt-6 rounded-2xl bg-red-50 p-4 text-red-700">
+                  {isSlotTaken ? t('booking.slotTaken') : t('booking.submitError')}
+                  {isSlotTaken && (
+                    <button
+                      type="button"
+                      onClick={pickAnotherTime}
+                      className="ms-2 font-semibold underline"
+                    >
+                      {t('booking.pickAnotherTime')}
+                    </button>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+
           <div className="mt-8 flex items-center justify-between gap-3 border-t border-slate-100 pt-6">
             {step > 0 ? (
               <button
@@ -228,17 +329,28 @@ export function HomePage() {
               <span />
             )}
 
-            <button
-              type="button"
-              onClick={() => goToStep(step + 1)}
-              disabled={!canGoNext}
-              className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/25 transition-colors hover:bg-brand-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
-            >
-              {step === LAST_STEP ? t('booking.confirm') : t('booking.next')}
-              {step < LAST_STEP && (
+            {step === LAST_STEP ? (
+              <button
+                key="submit"
+                type="submit"
+                form={DETAILS_FORM_ID}
+                disabled={bookingMutation.isPending}
+                className={primaryButtonClassName}
+              >
+                {bookingMutation.isPending ? t('booking.submitting') : t('booking.confirm')}
+              </button>
+            ) : (
+              <button
+                key="next"
+                type="button"
+                onClick={() => goToStep(step + 1)}
+                disabled={!canGoNext}
+                className={primaryButtonClassName}
+              >
+                {t('booking.next')}
                 <ArrowLeft className="size-5 ltr:rotate-180" aria-hidden="true" />
-              )}
-            </button>
+              </button>
+            )}
           </div>
         </section>
 
