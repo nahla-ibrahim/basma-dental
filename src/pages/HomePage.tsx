@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router'
 import { busyTimesQuery, createBooking } from '../api/bookings'
 import { doctorsQuery } from '../api/doctors'
 import { servicesQuery } from '../api/services'
@@ -50,8 +51,9 @@ export function HomePage() {
   const busyResult = useQuery(busyTimesQuery(from, to))
 
   const [step, setStep] = useState(0)
-  const [serviceId, setServiceId] = useState('')
-  const [doctorId, setDoctorId] = useState('')
+  const [searchParams] = useSearchParams()
+  const [serviceId, setServiceId] = useState(() => searchParams.get('service') ?? '')
+  const [doctorId, setDoctorId] = useState(() => searchParams.get('doctor') ?? '')
   const [dayKey, setDayKey] = useState<string | null>(null)
   const [slot, setSlot] = useState<DoctorSlot | null>(null)
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null)
@@ -139,8 +141,14 @@ export function HomePage() {
   }
 
   function handleServiceChange(newServiceId: string) {
+    const doctorOffersService =
+      doctorId === ANY_DOCTOR ||
+      doctorsResult.data?.some(
+        (doctor) => doctor.id === doctorId && doctor.serviceIds.includes(newServiceId),
+      )
+
     setServiceId(newServiceId)
-    setDoctorId('')
+    if (!doctorOffersService) setDoctorId('')
     setDayKey(null)
     setSlot(null)
   }
@@ -180,6 +188,7 @@ export function HomePage() {
     bookingMutation.reset()
     detailsForm.reset(emptyDetails)
     handleServiceChange('')
+    setDoctorId('')
     setStep(0)
   }
 
