@@ -1,11 +1,12 @@
 import { ArrowLeft, CalendarCheck, ShieldCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router'
 
 export function Hero() {
   const { t } = useTranslation()
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-x-clip">
       <div
         className="absolute -start-32 -top-32 size-96 rounded-full bg-brand-200/60 blur-2xl"
         aria-hidden="true"
@@ -32,19 +33,19 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#services"
+            <Link
+              to="/"
               className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/25 transition-colors hover:bg-brand-700"
             >
               {t('hero.book')}
               <ArrowLeft className="size-5 ltr:rotate-180 rtl:rotate-0" aria-hidden="true" />
-            </a>
-            <a
-              href="#services"
+            </Link>
+            <Link
+              to="/services"
               className="rounded-full bg-white px-6 py-3 font-semibold text-brand-700 ring-1 ring-brand-200 transition-colors hover:bg-brand-50"
             >
               {t('hero.explore')}
-            </a>
+            </Link>
           </div>
         </div>
 

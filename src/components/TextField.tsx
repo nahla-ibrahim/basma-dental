@@ -52,6 +52,7 @@ export function TextArea({
   label,
   hint,
   error,
+  rows = 3,
   ...props
 }: FieldProps & ComponentProps<'textarea'>) {
   const id = useId()
@@ -60,7 +61,7 @@ export function TextArea({
     <Field id={id} label={label} hint={hint} error={error}>
       <textarea
         id={id}
-        rows={3}
+        rows={rows}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         className={`${fieldClassName} resize-none`}

@@ -5,12 +5,18 @@
   },
   "header": {
     "nav": "Main navigation",
+    "home": "Home page",
+    "book": "Book",
     "services": "Services",
-    "book": "Book now",
-    "switchLanguageLabel": "التحويل للعربية"
+    "about": "About",
+    "switchLanguageLabel": "التحويل للعربية",
+    "doctors": "Our team",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
-    "badge": "Complete dental care",
+    "badge": "Complete oral and dental care",
     "titleLine1": "Your smile deserves",
     "titleLine2": "the best care",
     "description": "An expert team and modern equipment. Book your visit online in under a minute, with no calls and no waiting.",
@@ -18,13 +24,13 @@
     "explore": "Explore our services",
     "imageAlt": "A dentist talking with a patient in the clinic",
     "onlineTitle": "Online booking",
-    "onlineSubtitle": "Pick your time in seconds"
+    "onlineSubtitle": "Choose your time in seconds"
   },
   "services": {
     "title": "Our services",
-    "error": "Something went wrong while loading services",
+    "error": "We couldn't load the services",
     "retry": "Try again",
-    "empty": "No services are available right now",
+    "empty": "No services are available at the moment",
     "duration": "{{value, number}} min"
   },
   "booking": {
@@ -47,7 +53,7 @@
     "anyDoctor": "Any available dentist",
     "loading": "Loading...",
     "next": "Next",
-    "error": "Something went wrong while loading the data",
+    "error": "We couldn't load the data",
     "retry": "Try again",
     "summary": {
       "title": "Booking summary",
@@ -64,9 +70,9 @@
       "days": "Available days",
       "times": "Available times",
       "today": "Today",
-      "closed": "Full",
+      "closed": "Unavailable",
       "pickDay": "Pick a day to see the available times",
-      "noSlots": "No free times on this day, try another one"
+      "noSlots": "No times are available on this day. Please choose another day."
     },
     "detailsStep": {
       "title": "Your details",
@@ -87,16 +93,137 @@
       "invalidEmail": "Enter a valid email",
       "notesTooLong": "Notes must be under 300 characters"
     },
-    "submitting": "Booking...",
-    "submitError": "Something went wrong and the booking wasn't saved, please try again",
-    "slotTaken": "Sorry, this time was just booked. Please pick another one.",
-    "pickAnotherTime": "Pick another time",
+    "submitting": "Confirming...",
+    "submitError": "We couldn't complete your booking. Please try again.",
+    "slotTaken": "Sorry, this time has just been booked. Please choose another one.",
+    "pickAnotherTime": "Choose another time",
     "confirmation": {
-      "title": "Your booking is in!",
-      "message": "Your booking is waiting for the clinic's confirmation. We'll contact you on {{phone}}.",
+      "title": "Your booking has been received",
+      "message": "Your booking is awaiting the clinic's confirmation. We'll contact you on {{phone}}.",
       "status": "Status",
       "pending": "Pending confirmation",
       "bookAnother": "Book another appointment"
+    }
+  },
+  "servicesPage": {
+    "title": "Our services",
+    "subtitle": "Everything you need for a healthy, beautiful smile, in one place."
+  },
+  "serviceDetails": {
+    "back": "All services",
+    "book": "Book this service",
+    "doctors": "Dentists offering this service",
+    "duration": "Duration",
+    "price": "Price",
+    "notFound": "This service doesn't exist",
+    "notFoundMessage": "The link may be incorrect, or the service is no longer available.",
+    "error": "We couldn't load this service",
+    "retry": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The link you followed is incorrect or no longer available.",
+    "home": "Back to home"
+  },
+  "footer": {
+    "rights": "© {{year}} Basma Dental. All rights reserved."
+  },
+  "doctorsPage": {
+    "title": "Our dental team",
+    "subtitle": "Experienced specialist dentists, each with years of practice in their field.",
+    "experience": "{{value, number}} years of experience",
+    "viewProfile": "View profile",
+    "error": "We couldn't load the dentists",
+    "retry": "Try again"
+  },
+  "doctorDetails": {
+    "back": "All dentists",
+    "about": "About",
+    "experience": "Years of experience",
+    "services": "Services offered",
+    "book": "Book with {{name}}",
+    "notFound": "Dentist not found",
+    "notFoundMessage": "The link may be incorrect.",
+    "error": "We couldn't load this dentist",
+    "retry": "Try again"
+  },
+  "about": {
+    "story": {
+      "title": "Our story",
+      "body1": "Basma started with a simple idea: a visit to the dentist should be comfortable, not something to fear. Since opening, the clinic has brought together a specialist team and modern diagnostic and treatment technology.",
+      "body2": "We believe every patient deserves enough time and a clear explanation, so we make sure you understand your treatment plan before we begin.",
+      "imageAlt": "A modern treatment room at the clinic"
+    },
+    "stats": {
+      "label": "The clinic in numbers",
+      "experience": {
+        "value": "15+",
+        "label": "Years of experience"
+      },
+      "patients": {
+        "value": "8,000+",
+        "label": "Patients who trust us"
+      },
+      "rating": {
+        "value": "4.9",
+        "label": "Patient rating"
+      },
+      "doctors": {
+        "value": "4",
+        "label": "Specialist dentists"
+      }
+    },
+    "values": {
+      "title": "Why choose Basma?",
+      "subtitle": "We take care of every detail, so your visit is comfortable from booking to the end of your session.",
+      "equipment": {
+        "title": "Modern technology",
+        "description": "Digital X-rays and modern equipment for accurate diagnosis and faster treatment."
+      },
+      "painless": {
+        "title": "Pain-free care",
+        "description": "Modern local anaesthesia and a calm approach that keep you at ease."
+      },
+      "sterilization": {
+        "title": "Full sterilization",
+        "description": "Every instrument is sterilized to the highest safety standards before each patient."
+      },
+      "booking": {
+        "title": "Book in seconds",
+        "description": "Choose your service, dentist and time online."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "We're happy to answer your questions. Reach us whichever way suits you.",
+    "address": "Address",
+    "addressValue": "12 El-Tesseen St, Fifth Settlement, New Cairo",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": {
+      "title": "Opening hours",
+      "closed": "Closed",
+      "today": "Today",
+      "error": "We couldn't load the opening hours"
+    },
+    "form": {
+      "title": "Send us a message",
+      "name": "Name",
+      "email": "Email",
+      "message": "Your message",
+      "messagePlaceholder": "Write your question here",
+      "send": "Send message",
+      "sending": "Sending...",
+      "success": "Your message has been sent. We'll get back to you soon.",
+      "error": "We couldn't send your message. Please try again."
+    },
+    "validation": {
+      "required": "This field is required",
+      "nameTooShort": "Name must be at least 3 characters",
+      "invalidEmail": "Enter a valid email",
+      "messageTooShort": "Message must be at least 10 characters",
+      "messageTooLong": "Message must be under 1000 characters"
     }
   }
 }
