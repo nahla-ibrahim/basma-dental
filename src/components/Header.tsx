@@ -1,40 +1,93 @@
-import { Smile } from 'lucide-react'
+import { Menu, Smile, X } from 'lucide-react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link, NavLink } from 'react-router'
 import { LanguageSwitcher } from './LanguageSwitcher'
+
+const links = [
+  { to: '/services', label: 'header.services' },
+  { to: '/doctors', label: 'header.doctors' },
+  { to: '/about', label: 'header.about' },
+  { to: '/contact', label: 'header.contact' },
+] as const
+
+function navLinkClassName({ isActive }: { isActive: boolean }) {
+  return `block rounded-full px-4 py-2 transition-colors ${
+    isActive
+      ? 'bg-brand-50 text-brand-700'
+      : 'text-slate-600 hover:bg-slate-50 hover:text-brand-600'
+  }`
+}
 
 export function Header() {
   const { t } = useTranslation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const closeMenu = () => setIsMenuOpen(false)
 
   return (
-    <header className="sticky top-4 z-50 mx-auto mt-4 max-w-6xl px-4">
+    <header className="sticky top-4 z-50 mx-auto mt-4 max-w-7xl px-4">
       <nav
         aria-label={t('header.nav')}
-        className="flex items-center justify-between rounded-2xl border border-white/60 bg-white/70 px-4 py-3 shadow-sm backdrop-blur-md"
+        onKeyDown={(event) => event.key === 'Escape' && closeMenu()}
+        className="rounded-2xl border border-white/60 bg-white/75 px-4 py-3 shadow-sm backdrop-blur-md md:px-6"
       >
-        <a href="#top" className="flex items-center gap-2">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-brand-600 text-white">
-            <Smile className="size-5" aria-hidden="true" />
-          </span>
-          <span className="text-xl font-bold text-brand-800">{t('brand')}</span>
-        </a>
-
-        <ul className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
-          <li>
-            <a href="#services" className="transition-colors hover:text-brand-600">
-              {t('header.services')}
-            </a>
-          </li>
-        </ul>
-
-        <div className="flex items-center gap-2">
-          <LanguageSwitcher />
-          <a
-            href="#services"
-            className="rounded-full bg-brand-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-700"
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            to="/"
+            onClick={closeMenu}
+            aria-label={t('header.home')}
+            className="flex items-center gap-2"
           >
-            {t('header.book')}
-          </a>
+            <span className="flex size-9 items-center justify-center rounded-xl bg-brand-600 text-white">
+              <Smile className="size-5" aria-hidden="true" />
+            </span>
+            <span className="text-xl font-bold text-brand-800">{t('brand')}</span>
+          </Link>
+
+          <ul className="hidden items-center gap-2 font-medium md:flex">
+            {links.map((link) => (
+              <li key={link.to}>
+                <NavLink to={link.to} className={navLinkClassName}>
+                  {t(link.label)}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
+              className="flex size-9 items-center justify-center rounded-full text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 md:hidden"
+            >
+              {isMenuOpen ? (
+                <X className="size-5" aria-hidden="true" />
+              ) : (
+                <Menu className="size-5" aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </div>
+
+        {isMenuOpen && (
+          <ul
+            id="mobile-menu"
+            className="mt-3 space-y-1 border-t border-slate-100 pt-3 font-medium md:hidden"
+          >
+            {links.map((link) => (
+              <li key={link.to}>
+                <NavLink to={link.to} onClick={closeMenu} className={navLinkClassName}>
+                  {t(link.label)}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        )}
       </nav>
     </header>
   )
