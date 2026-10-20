@@ -1,7 +1,7 @@
 import { useId, type ComponentProps, type ReactNode } from 'react'
 
 const fieldClassName =
-  'w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 focus:outline-none aria-invalid:border-red-400 aria-invalid:focus:ring-red-100'
+  'w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink shadow-sm transition placeholder:text-ink-faint focus:border-brand-500 focus:ring-4 focus:ring-accent-soft focus:outline-none aria-invalid:border-red-400 aria-invalid:focus:ring-danger-soft'
 
 type FieldProps = {
   label: string
@@ -18,13 +18,13 @@ function Field({
 }: FieldProps & { id: string; children: ReactNode }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-slate-700">
+      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-ink-muted">
         {label}
-        {hint && <span className="font-normal text-slate-400"> ({hint})</span>}
+        {hint && <span className="font-normal text-ink-faint"> ({hint})</span>}
       </label>
       {children}
       {error && (
-        <p id={`${id}-error`} className="mt-1.5 text-sm text-red-600">
+        <p id={`${id}-error`} className="mt-1.5 text-sm text-danger">
           {error}
         </p>
       )}

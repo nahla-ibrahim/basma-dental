@@ -30,7 +30,7 @@ export function TimeSlots({ slots, selected, onSelect }: TimeSlotsProps) {
             className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-sm font-semibold transition-colors ${
               isSelected
                 ? 'bg-brand-600 text-white'
-                : 'bg-brand-50 text-brand-700 hover:bg-brand-100'
+                : 'bg-accent-soft text-accent hover:bg-accent-muted'
             }`}
           >
             <Clock className="size-4" aria-hidden="true" />

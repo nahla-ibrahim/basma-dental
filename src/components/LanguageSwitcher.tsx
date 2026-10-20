@@ -12,7 +12,7 @@ export function LanguageSwitcher() {
       onClick={() => i18n.changeLanguage(nextLanguage)}
       aria-label={label}
       title={label}
-      className="flex h-9 items-center gap-1 rounded-full px-2.5 text-xs font-bold text-slate-600 ring-1 ring-slate-200 transition-colors hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200"
+      className="flex h-9 items-center gap-1 rounded-full px-2.5 text-xs font-bold text-ink-muted ring-1 ring-line transition-colors hover:bg-accent-soft hover:text-accent hover:ring-accent-line"
     >
       <Globe className="size-4" aria-hidden="true" />
       <span aria-hidden="true">{nextLanguage.toUpperCase()}</span>

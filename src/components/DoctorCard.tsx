@@ -10,9 +10,9 @@ export function DoctorCard({ doctor }: { doctor: Doctor }) {
   return (
     <Link
       to={`/doctors/${doctor.id}`}
-      className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10"
+      className="group flex flex-col overflow-hidden rounded-3xl bg-surface shadow-sm ring-1 ring-edge transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10"
     >
-      <div className="aspect-4/5 overflow-hidden bg-slate-100">
+      <div className="aspect-4/5 overflow-hidden bg-surface-muted">
         <img
           src={doctor.imageUrl}
           alt=""
@@ -24,17 +24,15 @@ export function DoctorCard({ doctor }: { doctor: Doctor }) {
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <h2 className="text-lg font-bold text-slate-900">
-          {isArabic ? doctor.nameAr : doctor.nameEn}
-        </h2>
-        <p className="mt-1 text-sm font-medium text-brand-600">
+        <h2 className="text-lg font-bold text-ink">{isArabic ? doctor.nameAr : doctor.nameEn}</h2>
+        <p className="mt-1 text-sm font-medium text-accent">
           {isArabic ? doctor.specialtyAr : doctor.specialtyEn}
         </p>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-ink-subtle">
           {t('doctorsPage.experience', { value: doctor.yearsOfExperience })}
         </p>
 
-        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700">
+        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
           {t('doctorsPage.viewProfile')}
           <ArrowLeft
             className="size-4 transition-transform group-hover:-translate-x-1 ltr:rotate-180 ltr:group-hover:translate-x-1"

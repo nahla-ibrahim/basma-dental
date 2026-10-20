@@ -21,9 +21,9 @@ export function AboutPage() {
           className="aspect-4/3 w-full rounded-3xl object-cover shadow-xl shadow-brand-900/10"
         />
         <div>
-          <h2 className="text-3xl font-bold text-slate-900">{t('about.story.title')}</h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">{t('about.story.body1')}</p>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">{t('about.story.body2')}</p>
+          <h2 className="text-3xl font-bold text-ink">{t('about.story.title')}</h2>
+          <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('about.story.body1')}</p>
+          <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('about.story.body2')}</p>
         </div>
       </section>
 

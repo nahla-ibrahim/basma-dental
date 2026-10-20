@@ -31,7 +31,7 @@ export function ServiceCard({
   return (
     <Link
       to={`/services/${id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10"
+      className="group flex flex-col overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-edge transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10"
     >
       <div className="aspect-[8/5] overflow-hidden">
         <img
@@ -45,21 +45,21 @@ export function ServiceCard({
       </div>
 
       <div className="relative flex flex-1 flex-col p-5 pt-9">
-        <span className="absolute start-5 -top-7 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg ring-4 ring-white">
+        <span className="absolute start-5 -top-7 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg ring-4 ring-surface">
           <Icon className="size-7" aria-hidden="true" />
         </span>
 
-        <h3 className="text-lg font-bold text-slate-900">{name}</h3>
-        <p className="mt-1 line-clamp-2 flex-1 text-sm leading-relaxed text-slate-600">
+        <h3 className="text-lg font-bold text-ink">{name}</h3>
+        <p className="mt-1 line-clamp-2 flex-1 text-sm leading-relaxed text-ink-muted">
           {description}
         </p>
 
-        <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4 text-sm">
-          <span className="flex items-center gap-1.5 text-slate-500">
+        <div className="mt-5 flex items-center justify-between border-t border-line pt-4 text-sm">
+          <span className="flex items-center gap-1.5 text-ink-subtle">
             <Clock className="size-4" aria-hidden="true" />
             {t('services.duration', { value: durationMin })}
           </span>
-          <span className="text-base font-bold text-brand-700">{formattedPrice}</span>
+          <span className="text-base font-bold text-accent">{formattedPrice}</span>
         </div>
       </div>
     </Link>

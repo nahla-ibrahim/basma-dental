@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, NavLink } from 'react-router'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { ThemeToggle } from './ThemeToggle'
 
 const links = [
   { to: '/services', label: 'header.services' },
@@ -14,8 +15,8 @@ const links = [
 function navLinkClassName({ isActive }: { isActive: boolean }) {
   return `block rounded-full px-4 py-2 transition-colors ${
     isActive
-      ? 'bg-brand-50 text-brand-700'
-      : 'text-slate-600 hover:bg-slate-50 hover:text-brand-600'
+      ? 'bg-accent-soft text-accent'
+      : 'text-ink-muted hover:bg-surface-muted hover:text-accent'
   }`
 }
 
@@ -38,7 +39,7 @@ export function Header() {
       <nav
         aria-label={t('header.nav')}
         onKeyDown={(event) => event.key === 'Escape' && closeMenu()}
-        className="relative rounded-2xl border border-white/60 bg-white/75 px-4 py-3 shadow-sm backdrop-blur-md md:px-6"
+        className="relative rounded-2xl border border-surface/60 bg-surface/75 px-4 py-3 shadow-sm backdrop-blur-md md:px-6"
       >
         <div className="flex items-center justify-between gap-4">
           <Link
@@ -50,7 +51,7 @@ export function Header() {
             <span className="flex size-9 items-center justify-center rounded-xl bg-brand-600 text-white">
               <Smile className="size-5" aria-hidden="true" />
             </span>
-            <span className="text-xl font-bold text-brand-800">{t('brand')}</span>
+            <span className="text-xl font-bold text-accent-strong">{t('brand')}</span>
           </Link>
 
           <ul className="hidden items-center gap-2 font-medium md:flex">
@@ -64,6 +65,7 @@ export function Header() {
           </ul>
 
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <LanguageSwitcher />
             <button
               type="button"
@@ -71,7 +73,7 @@ export function Header() {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
               aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
-              className="flex size-9 items-center justify-center rounded-full text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 md:hidden"
+              className="flex size-9 items-center justify-center rounded-full text-ink-muted ring-1 ring-line hover:bg-surface-muted md:hidden"
             >
               {isMenuOpen ? (
                 <X className="size-5" aria-hidden="true" />
@@ -85,7 +87,7 @@ export function Header() {
         {isMenuOpen && (
           <ul
             id="mobile-menu"
-            className="absolute inset-x-0 top-full mt-2 space-y-1 rounded-2xl bg-white p-3 font-medium shadow-lg ring-1 ring-slate-900/5 md:hidden"
+            className="absolute inset-x-0 top-full mt-2 space-y-1 rounded-2xl bg-surface p-3 font-medium shadow-lg ring-1 ring-edge md:hidden"
           >
             {links.map((link) => (
               <li key={link.to}>

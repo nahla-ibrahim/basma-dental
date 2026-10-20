@@ -13,7 +13,9 @@
     "doctors": "Our team",
     "contact": "Contact",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "darkMode": "Switch to dark mode",
+    "lightMode": "Switch to light mode"
   },
   "hero": {
     "badge": "Complete oral and dental care",

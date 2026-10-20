@@ -28,7 +28,7 @@ const BOOKING_DAYS = 14
 const DETAILS_FORM_ID = 'booking-details-form'
 
 const primaryButtonClassName =
-  'inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/25 transition-colors hover:bg-brand-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none'
+  'inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/25 transition-colors hover:bg-brand-700 disabled:bg-surface-strong disabled:text-ink-faint disabled:shadow-none'
 
 const emptyDetails: BookingDetails = {
   patientName: '',
@@ -208,18 +208,18 @@ export function HomePage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
       <div className="mb-10 text-center">
-        <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">{t('booking.title')}</h1>
-        <p className="mx-auto mt-3 max-w-xl text-lg text-slate-600">{t('booking.subtitle')}</p>
+        <h1 className="text-3xl font-bold text-ink md:text-4xl">{t('booking.title')}</h1>
+        <p className="mx-auto mt-3 max-w-xl text-lg text-ink-muted">{t('booking.subtitle')}</p>
       </div>
 
       <div className="grid items-start gap-6 lg:grid-cols-[1fr_340px]">
-        <section className="min-w-0 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5 md:p-8">
+        <section className="min-w-0 rounded-3xl bg-surface p-6 shadow-sm ring-1 ring-edge md:p-8">
           <BookingSteps currentStep={step} />
 
           <h2
             ref={stepHeadingRef}
             tabIndex={-1}
-            className="mt-8 text-xl font-bold text-slate-900 focus:outline-none"
+            className="mt-8 text-xl font-bold text-ink focus:outline-none"
           >
             {stepTitles[step]}
           </h2>
@@ -282,7 +282,10 @@ export function HomePage() {
             ) : isStepTwoLoading ? (
               <div className="mt-6 flex gap-2" aria-busy="true">
                 {Array.from({ length: 7 }, (_, index) => (
-                  <div key={index} className="h-20 w-18 animate-pulse rounded-2xl bg-slate-100" />
+                  <div
+                    key={index}
+                    className="h-20 w-18 animate-pulse rounded-2xl bg-surface-muted"
+                  />
                 ))}
               </div>
             ) : (
@@ -290,9 +293,9 @@ export function HomePage() {
                 <DayPicker days={days} selectedKey={dayKey} onSelect={handleDayChange} />
 
                 {!selectedDay ? (
-                  <p className="text-slate-500">{t('booking.timeStep.pickDay')}</p>
+                  <p className="text-ink-subtle">{t('booking.timeStep.pickDay')}</p>
                 ) : slots.length === 0 ? (
-                  <p className="text-slate-500">{t('booking.timeStep.noSlots')}</p>
+                  <p className="text-ink-subtle">{t('booking.timeStep.noSlots')}</p>
                 ) : (
                   <TimeSlots slots={slots} selected={slot} onSelect={setSlot} />
                 )}
@@ -308,7 +311,7 @@ export function HomePage() {
               />
 
               {bookingMutation.isError && (
-                <div role="alert" className="mt-6 rounded-2xl bg-red-50 p-4 text-red-700">
+                <div role="alert" className="mt-6 rounded-2xl bg-danger-soft p-4 text-danger">
                   {isSlotTaken ? t('booking.slotTaken') : t('booking.submitError')}
                   {isSlotTaken && (
                     <button
@@ -324,12 +327,12 @@ export function HomePage() {
             </>
           )}
 
-          <div className="mt-8 flex items-center justify-between gap-3 border-t border-slate-100 pt-6">
+          <div className="mt-8 flex items-center justify-between gap-3 border-t border-line pt-6">
             {step > 0 ? (
               <button
                 type="button"
                 onClick={() => goToStep(step - 1)}
-                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-semibold text-slate-600 ring-1 ring-slate-200 transition-colors hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-semibold text-ink-muted ring-1 ring-line transition-colors hover:bg-surface-muted"
               >
                 <ArrowRight className="size-5 ltr:rotate-180" aria-hidden="true" />
                 {t('booking.back')}
@@ -378,8 +381,8 @@ function LoadError({ onRetry }: { onRetry: () => void }) {
   const { t } = useTranslation()
 
   return (
-    <div role="alert" className="mt-6 rounded-2xl bg-red-50 p-6 text-center">
-      <p className="text-red-700">{t('booking.error')}</p>
+    <div role="alert" className="mt-6 rounded-2xl bg-danger-soft p-6 text-center">
+      <p className="text-danger">{t('booking.error')}</p>
       <button
         type="button"
         onClick={onRetry}

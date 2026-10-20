@@ -41,21 +41,21 @@ export function BookingConfirmation({
   ]
 
   return (
-    <section className="mx-auto max-w-xl rounded-3xl bg-white p-8 text-center shadow-sm ring-1 ring-slate-900/5">
-      <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-brand-50 text-brand-600">
+    <section className="mx-auto max-w-xl rounded-3xl bg-surface p-8 text-center shadow-sm ring-1 ring-edge">
+      <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-accent-soft text-accent">
         <CircleCheck className="size-9" aria-hidden="true" />
       </span>
 
-      <h2 className="mt-5 text-2xl font-bold text-slate-900">{t('booking.confirmation.title')}</h2>
-      <p className="mt-2 text-slate-600">
+      <h2 className="mt-5 text-2xl font-bold text-ink">{t('booking.confirmation.title')}</h2>
+      <p className="mt-2 text-ink-muted">
         {t('booking.confirmation.message', { phone: booking.patientPhone })}
       </p>
 
-      <dl className="mt-8 space-y-3 rounded-2xl bg-slate-50 p-5 text-sm">
+      <dl className="mt-8 space-y-3 rounded-2xl bg-surface-muted p-5 text-sm">
         {rows.map((row) => (
           <div key={row.label} className="flex justify-between gap-4">
-            <dt className="text-slate-500">{row.label}</dt>
-            <dd className="text-end font-semibold text-slate-900">{row.value}</dd>
+            <dt className="text-ink-subtle">{row.label}</dt>
+            <dd className="text-end font-semibold text-ink">{row.value}</dd>
           </div>
         ))}
       </dl>

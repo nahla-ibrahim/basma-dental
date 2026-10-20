@@ -38,16 +38,16 @@ export function DayPicker({ days, selectedKey, onSelect }: DayPickerProps) {
             className={`flex w-18 shrink-0 flex-col items-center gap-0.5 rounded-2xl py-3 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
               isSelected
                 ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/25'
-                : 'bg-slate-50 text-slate-700 ring-1 ring-slate-200 enabled:hover:bg-brand-50 enabled:hover:ring-brand-200'
+                : 'bg-surface-muted text-ink-muted ring-1 ring-line enabled:hover:bg-accent-soft enabled:hover:ring-accent-line'
             }`}
           >
-            <span className={isSelected ? 'text-brand-100' : 'text-slate-500'}>
+            <span className={isSelected ? 'text-brand-100' : 'text-ink-subtle'}>
               {isToday(day.date)
                 ? t('booking.timeStep.today')
                 : format(day.date, 'EEE', { locale })}
             </span>
             <span className="text-xl font-bold">{format(day.date, 'd', { locale })}</span>
-            <span className={`text-xs ${isSelected ? 'text-brand-100' : 'text-slate-400'}`}>
+            <span className={`text-xs ${isSelected ? 'text-brand-100' : 'text-ink-faint'}`}>
               {day.isAvailable ? format(day.date, 'MMM', { locale }) : t('booking.timeStep.closed')}
             </span>
           </button>

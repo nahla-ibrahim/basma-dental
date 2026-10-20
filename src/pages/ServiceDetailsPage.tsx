@@ -24,7 +24,7 @@ export function ServiceDetailsPage() {
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
       <Link
         to="/services"
-        className="mb-8 inline-flex items-center gap-2 font-semibold text-brand-700 hover:text-brand-800"
+        className="mb-8 inline-flex items-center gap-2 font-semibold text-accent hover:text-accent-strong"
       >
         <ArrowRight className="size-5 ltr:rotate-180" aria-hidden="true" />
         {t('serviceDetails.back')}
@@ -32,11 +32,11 @@ export function ServiceDetailsPage() {
 
       {serviceResult.isPending && (
         <div className="grid gap-10 md:grid-cols-2" aria-busy="true">
-          <div className="aspect-4/3 animate-pulse rounded-3xl bg-slate-200" />
+          <div className="aspect-4/3 animate-pulse rounded-3xl bg-surface-strong" />
           <div className="space-y-4">
-            <div className="h-10 w-2/3 animate-pulse rounded-lg bg-slate-200" />
-            <div className="h-5 w-full animate-pulse rounded bg-slate-100" />
-            <div className="h-5 w-4/5 animate-pulse rounded bg-slate-100" />
+            <div className="h-10 w-2/3 animate-pulse rounded-lg bg-surface-strong" />
+            <div className="h-5 w-full animate-pulse rounded bg-surface-muted" />
+            <div className="h-5 w-4/5 animate-pulse rounded bg-surface-muted" />
           </div>
         </div>
       )}
@@ -44,12 +44,12 @@ export function ServiceDetailsPage() {
       {serviceResult.isError &&
         (serviceResult.error instanceof ApiError && serviceResult.error.status === 404 ? (
           <div className="py-16 text-center">
-            <h1 className="text-2xl font-bold text-slate-900">{t('serviceDetails.notFound')}</h1>
-            <p className="mt-2 text-slate-600">{t('serviceDetails.notFoundMessage')}</p>
+            <h1 className="text-2xl font-bold text-ink">{t('serviceDetails.notFound')}</h1>
+            <p className="mt-2 text-ink-muted">{t('serviceDetails.notFoundMessage')}</p>
           </div>
         ) : (
-          <div role="alert" className="rounded-2xl bg-red-50 p-6 text-center">
-            <p className="text-red-700">{t('serviceDetails.error')}</p>
+          <div role="alert" className="rounded-2xl bg-danger-soft p-6 text-center">
+            <p className="text-danger">{t('serviceDetails.error')}</p>
             <button
               type="button"
               onClick={() => serviceResult.refetch()}
@@ -73,29 +73,29 @@ export function ServiceDetailsPage() {
           <div>
             <ServiceIconBadge icon={service.icon} />
 
-            <h1 className="mt-5 text-3xl font-bold text-slate-900 md:text-4xl">
+            <h1 className="mt-5 text-3xl font-bold text-ink md:text-4xl">
               {isArabic ? service.nameAr : service.nameEn}
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-ink-muted">
               {isArabic ? service.descriptionAr : service.descriptionEn}
             </p>
 
             <dl className="mt-6 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-white p-4 ring-1 ring-slate-900/5">
-                <dt className="flex items-center gap-1.5 text-sm text-slate-500">
+              <div className="rounded-2xl bg-surface p-4 ring-1 ring-edge">
+                <dt className="flex items-center gap-1.5 text-sm text-ink-subtle">
                   <Clock className="size-4" aria-hidden="true" />
                   {t('serviceDetails.duration')}
                 </dt>
-                <dd className="mt-1 text-lg font-bold text-slate-900">
+                <dd className="mt-1 text-lg font-bold text-ink">
                   {t('services.duration', { value: service.durationMin })}
                 </dd>
               </div>
-              <div className="rounded-2xl bg-white p-4 ring-1 ring-slate-900/5">
-                <dt className="flex items-center gap-1.5 text-sm text-slate-500">
+              <div className="rounded-2xl bg-surface p-4 ring-1 ring-edge">
+                <dt className="flex items-center gap-1.5 text-sm text-ink-subtle">
                   <Banknote className="size-4" aria-hidden="true" />
                   {t('serviceDetails.price')}
                 </dt>
-                <dd className="mt-1 text-lg font-bold text-brand-700">
+                <dd className="mt-1 text-lg font-bold text-accent">
                   {formatPrice(service.price, i18n.language)}
                 </dd>
               </div>
@@ -103,17 +103,17 @@ export function ServiceDetailsPage() {
 
             {doctors.length > 0 && (
               <section className="mt-8">
-                <h2 className="text-lg font-bold text-slate-900">{t('serviceDetails.doctors')}</h2>
+                <h2 className="text-lg font-bold text-ink">{t('serviceDetails.doctors')}</h2>
                 <ul className="mt-3 space-y-2">
                   {doctors.map((doctor) => (
                     <li
                       key={doctor.id}
-                      className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 ring-1 ring-slate-900/5"
+                      className="flex items-center justify-between rounded-2xl bg-surface px-4 py-3 ring-1 ring-edge"
                     >
-                      <span className="font-semibold text-slate-900">
+                      <span className="font-semibold text-ink">
                         {isArabic ? doctor.nameAr : doctor.nameEn}
                       </span>
-                      <span className="text-sm text-slate-500">
+                      <span className="text-sm text-ink-subtle">
                         {isArabic ? doctor.specialtyAr : doctor.specialtyEn}
                       </span>
                     </li>

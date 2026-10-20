@@ -25,7 +25,7 @@ export function DoctorDetailsPage() {
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
       <Link
         to="/doctors"
-        className="mb-8 inline-flex items-center gap-2 font-semibold text-brand-700 hover:text-brand-800"
+        className="mb-8 inline-flex items-center gap-2 font-semibold text-accent hover:text-accent-strong"
       >
         <ArrowRight className="size-5 ltr:rotate-180" aria-hidden="true" />
         {t('doctorDetails.back')}
@@ -33,11 +33,11 @@ export function DoctorDetailsPage() {
 
       {doctorResult.isPending && (
         <div className="grid gap-10 md:grid-cols-[360px_1fr]" aria-busy="true">
-          <div className="aspect-4/5 animate-pulse rounded-3xl bg-slate-200" />
+          <div className="aspect-4/5 animate-pulse rounded-3xl bg-surface-strong" />
           <div className="space-y-4">
-            <div className="h-10 w-2/3 animate-pulse rounded-lg bg-slate-200" />
-            <div className="h-5 w-1/3 animate-pulse rounded bg-slate-100" />
-            <div className="h-24 w-full animate-pulse rounded bg-slate-100" />
+            <div className="h-10 w-2/3 animate-pulse rounded-lg bg-surface-strong" />
+            <div className="h-5 w-1/3 animate-pulse rounded bg-surface-muted" />
+            <div className="h-24 w-full animate-pulse rounded bg-surface-muted" />
           </div>
         </div>
       )}
@@ -45,12 +45,12 @@ export function DoctorDetailsPage() {
       {doctorResult.isError &&
         (doctorResult.error instanceof ApiError && doctorResult.error.status === 404 ? (
           <div className="py-16 text-center">
-            <h1 className="text-2xl font-bold text-slate-900">{t('doctorDetails.notFound')}</h1>
-            <p className="mt-2 text-slate-600">{t('doctorDetails.notFoundMessage')}</p>
+            <h1 className="text-2xl font-bold text-ink">{t('doctorDetails.notFound')}</h1>
+            <p className="mt-2 text-ink-muted">{t('doctorDetails.notFoundMessage')}</p>
           </div>
         ) : (
-          <div role="alert" className="rounded-2xl bg-red-50 p-6 text-center">
-            <p className="text-red-700">{t('doctorDetails.error')}</p>
+          <div role="alert" className="rounded-2xl bg-danger-soft p-6 text-center">
+            <p className="text-danger">{t('doctorDetails.error')}</p>
             <button
               type="button"
               onClick={() => doctorResult.refetch()}
@@ -72,35 +72,35 @@ export function DoctorDetailsPage() {
           />
 
           <div>
-            <p className="font-semibold text-brand-600">
+            <p className="font-semibold text-accent">
               {isArabic ? doctor.specialtyAr : doctor.specialtyEn}
             </p>
-            <h1 className="mt-2 text-3xl font-bold text-slate-900 md:text-4xl">
+            <h1 className="mt-2 text-3xl font-bold text-ink md:text-4xl">
               {isArabic ? doctor.nameAr : doctor.nameEn}
             </h1>
 
-            <div className="mt-5 inline-flex items-center gap-3 rounded-2xl bg-white px-4 py-3 ring-1 ring-slate-900/5">
-              <span className="flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+            <div className="mt-5 inline-flex items-center gap-3 rounded-2xl bg-surface px-4 py-3 ring-1 ring-edge">
+              <span className="flex size-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
                 <Award className="size-5" aria-hidden="true" />
               </span>
               <div>
-                <p className="text-xs text-slate-500">{t('doctorDetails.experience')}</p>
-                <p className="font-bold text-slate-900">
+                <p className="text-xs text-ink-subtle">{t('doctorDetails.experience')}</p>
+                <p className="font-bold text-ink">
                   {new Intl.NumberFormat(i18n.language).format(doctor.yearsOfExperience)}
                 </p>
               </div>
             </div>
 
             <section className="mt-8">
-              <h2 className="text-lg font-bold text-slate-900">{t('doctorDetails.about')}</h2>
-              <p className="mt-2 text-lg leading-relaxed text-slate-600">
+              <h2 className="text-lg font-bold text-ink">{t('doctorDetails.about')}</h2>
+              <p className="mt-2 text-lg leading-relaxed text-ink-muted">
                 {isArabic ? doctor.bioAr : doctor.bioEn}
               </p>
             </section>
 
             {services.length > 0 && (
               <section className="mt-8">
-                <h2 className="text-lg font-bold text-slate-900">{t('doctorDetails.services')}</h2>
+                <h2 className="text-lg font-bold text-ink">{t('doctorDetails.services')}</h2>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {services.map((service) => {
                     const Icon = serviceIcons[service.icon]
@@ -109,9 +109,9 @@ export function DoctorDetailsPage() {
                       <li key={service.id}>
                         <Link
                           to={`/services/${service.id}`}
-                          className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-200 transition-colors hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200"
+                          className="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-medium text-ink-muted ring-1 ring-line transition-colors hover:bg-accent-soft hover:text-accent hover:ring-accent-line"
                         >
-                          <Icon className="size-4 text-brand-600" aria-hidden="true" />
+                          <Icon className="size-4 text-accent" aria-hidden="true" />
                           {isArabic ? service.nameAr : service.nameEn}
                         </Link>
                       </li>

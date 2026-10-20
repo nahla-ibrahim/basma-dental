@@ -24,14 +24,14 @@ export function WorkingHoursList() {
     return (
       <div className="space-y-3" aria-busy="true">
         {weekOrder.map((day) => (
-          <div key={day} className="h-6 animate-pulse rounded bg-slate-100" />
+          <div key={day} className="h-6 animate-pulse rounded bg-surface-muted" />
         ))}
       </div>
     )
   }
 
   if (isError) {
-    return <p className="text-red-600">{t('contact.hours.error')}</p>
+    return <p className="text-danger">{t('contact.hours.error')}</p>
   }
 
   return (
@@ -43,12 +43,12 @@ export function WorkingHoursList() {
         return (
           <div
             key={day}
-            className={`flex justify-between rounded-xl px-3 py-2 ${isToday ? 'bg-brand-50 font-semibold text-brand-800' : 'text-slate-600'}`}
+            className={`flex justify-between rounded-xl px-3 py-2 ${isToday ? 'bg-accent-soft font-semibold text-accent-strong' : 'text-ink-muted'}`}
           >
             <dt>
               {locale.localize.day(day, { width: 'wide' })}
               {isToday && (
-                <span className="ms-2 text-xs text-brand-600">({t('contact.hours.today')})</span>
+                <span className="ms-2 text-xs text-accent">({t('contact.hours.today')})</span>
               )}
             </dt>
             <dd>

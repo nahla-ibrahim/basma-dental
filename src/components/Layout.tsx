@@ -13,7 +13,7 @@ export function Layout() {
         <Outlet />
       </div>
 
-      <footer className="py-8 text-center text-sm text-slate-500">
+      <footer className="py-8 text-center text-sm text-ink-subtle">
         {t('footer.rights', { year: new Date().getFullYear() })}
       </footer>
 

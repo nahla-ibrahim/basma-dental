@@ -26,19 +26,17 @@ export function BookingSteps({ currentStep }: BookingStepsProps) {
               className={`flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
                 isDone || isCurrent
                   ? 'bg-brand-600 text-white'
-                  : 'bg-slate-100 text-slate-400 ring-1 ring-slate-200'
+                  : 'bg-surface-muted text-ink-faint ring-1 ring-line'
               }`}
             >
               {isDone ? <Check className="size-4" aria-hidden="true" /> : index + 1}
             </span>
-            <span
-              className={`text-sm font-semibold ${isCurrent ? 'text-slate-900' : 'text-slate-400'}`}
-            >
+            <span className={`text-sm font-semibold ${isCurrent ? 'text-ink' : 'text-ink-faint'}`}>
               {t(`booking.steps.${step}`)}
             </span>
             {index < steps.length - 1 && (
               <span
-                className={`h-0.5 flex-1 rounded-full ${isDone ? 'bg-brand-600' : 'bg-slate-200'}`}
+                className={`h-0.5 flex-1 rounded-full ${isDone ? 'bg-brand-600' : 'bg-surface-strong'}`}
                 aria-hidden="true"
               />
             )}
