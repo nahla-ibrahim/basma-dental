@@ -6,3 +6,10 @@ export const servicesQuery = queryOptions({
   queryKey: ['services'],
   queryFn: () => apiClient.get<Service[]>('/services'),
 })
+
+export function serviceQuery(id: string) {
+  return queryOptions({
+    queryKey: ['services', id],
+    queryFn: () => apiClient.get<Service>(`/services/${id}`),
+  })
+}

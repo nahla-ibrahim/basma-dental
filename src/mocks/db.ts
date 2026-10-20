@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import type { Booking } from '../types/booking'
 import type { Doctor } from '../types/doctor'
+import type { ContactMessage } from '../types/message'
 import type { Service } from '../types/service'
 import type { WorkingHours } from '../types/workingHours'
 import {
@@ -11,13 +12,14 @@ import {
   seedWorkingHours,
 } from './seed'
 
-const STORAGE_KEY = 'basma-db'
+const STORAGE_KEY = 'basma-db-v3'
 
 type Db = {
   services: Service[]
   doctors: Doctor[]
   workingHours: WorkingHours[]
   bookings: Booking[]
+  messages: ContactMessage[]
   seededOn: string
 }
 
@@ -32,6 +34,7 @@ export function readDb(): Db {
       doctors: seedDoctors,
       workingHours: seedWorkingHours,
       bookings: createSeedBookings(today),
+      messages: [],
       seededOn: todayKey,
     }
     writeDb(db)
@@ -39,6 +42,7 @@ export function readDb(): Db {
   }
 
   const db = JSON.parse(saved) as Db
+  db.messages ??= []
 
   if (db.seededOn !== todayKey) {
     const userBookings = db.bookings.filter((booking) => booking.userId !== DEMO_USER_ID)

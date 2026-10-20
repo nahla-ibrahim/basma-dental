@@ -4,5 +4,9 @@ export type Doctor = {
   nameEn: string
   specialtyAr: string
   specialtyEn: string
+  bioAr: string
+  bioEn: string
+  yearsOfExperience: number
+  imageUrl: string
   serviceIds: string[]
 }

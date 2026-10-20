@@ -7,7 +7,7 @@ import type { WorkingHours } from '../types/workingHours'
 export const seedServices: Service[] = [
   {
     id: 's1',
-    nameAr: 'كشف وفحص',
+    nameAr: 'الكشف والفحص',
     nameEn: 'Check-up',
     descriptionAr: 'فحص شامل للأسنان واللثة مع خطة علاج واضحة.',
     descriptionEn: 'A full examination of your teeth and gums with a clear treatment plan.',
@@ -31,7 +31,7 @@ export const seedServices: Service[] = [
   },
   {
     id: 's3',
-    nameAr: 'حشو تجميلي',
+    nameAr: 'الحشو التجميلي',
     nameEn: 'Composite filling',
     descriptionAr: 'علاج التسوس بحشو بلون السن الطبيعي.',
     descriptionEn: 'Treating cavities with a tooth-coloured filling.',
@@ -43,9 +43,9 @@ export const seedServices: Service[] = [
   },
   {
     id: 's4',
-    nameAr: 'حشو عصب',
+    nameAr: 'علاج العصب',
     nameEn: 'Root canal',
-    descriptionAr: 'علاج العصب الملتهب للحفاظ على السن بدل خلعه.',
+    descriptionAr: 'علاج العصب الملتهب للحفاظ على السن بدلًا من خلعه.',
     descriptionEn: 'Treating an inflamed nerve to save the tooth instead of extracting it.',
     icon: 'root-canal',
     imageUrl: '/images/services/root-canal.webp',
@@ -57,7 +57,7 @@ export const seedServices: Service[] = [
     id: 's5',
     nameAr: 'تبييض الأسنان',
     nameEn: 'Teeth whitening',
-    descriptionAr: 'جلسة تبييض في العيادة لابتسامة أفتح بدرجات.',
+    descriptionAr: 'جلسة تبييض داخل العيادة لابتسامة أكثر إشراقًا.',
     descriptionEn: 'An in-clinic whitening session for a noticeably brighter smile.',
     icon: 'whitening',
     imageUrl: '/images/services/whitening.webp',
@@ -67,7 +67,7 @@ export const seedServices: Service[] = [
   },
   {
     id: 's6',
-    nameAr: 'خلع ضرس',
+    nameAr: 'خلع الأسنان',
     nameEn: 'Tooth extraction',
     descriptionAr: 'خلع آمن تحت تخدير موضعي مع تعليمات ما بعد الخلع.',
     descriptionEn: 'Safe extraction under local anaesthesia with aftercare instructions.',
@@ -84,8 +84,14 @@ export const seedDoctors: Doctor[] = [
     id: 'd1',
     nameAr: 'د. أحمد سامي',
     nameEn: 'Dr. Ahmed Samy',
-    specialtyAr: 'طب أسنان عام',
+    specialtyAr: 'طب الأسنان العام',
     specialtyEn: 'General dentistry',
+    bioAr:
+      'يتابع د. أحمد صحة أسنان مرضاه بدءًا من الفحص الدوري وحتى علاج التسوس، ويحرص على شرح خطة العلاج بوضوح قبل البدء.',
+    bioEn:
+      'Dr. Ahmed looks after his patients from routine check-ups to cavity treatment, and always explains the treatment plan clearly before starting.',
+    yearsOfExperience: 12,
+    imageUrl: '/images/doctors/d1.webp',
     serviceIds: ['s1', 's2', 's3', 's6'],
   },
   {
@@ -94,6 +100,12 @@ export const seedDoctors: Doctor[] = [
     nameEn: 'Dr. Mona El-Sherif',
     specialtyAr: 'تجميل الأسنان',
     specialtyEn: 'Cosmetic dentistry',
+    bioAr:
+      'متخصصة في تجميل الأسنان والتبييض، وتهتم بأن تبدو النتيجة طبيعية ومتناسقة مع ملامح كل مريض.',
+    bioEn:
+      "A specialist in cosmetic dentistry and whitening who makes sure every result looks natural and suits each patient's features.",
+    yearsOfExperience: 9,
+    imageUrl: '/images/doctors/d2.webp',
     serviceIds: ['s1', 's2', 's3', 's5'],
   },
   {
@@ -102,6 +114,12 @@ export const seedDoctors: Doctor[] = [
     nameEn: 'Dr. Karim Adel',
     specialtyAr: 'علاج الجذور والأعصاب',
     specialtyEn: 'Endodontics',
+    bioAr:
+      'متخصص في علاج الجذور والأعصاب باستخدام أحدث الأجهزة، بهدف الحفاظ على الأسنان الطبيعية وتجنّب خلعها.',
+    bioEn:
+      'A root canal specialist who uses modern equipment to save natural teeth and avoid extractions.',
+    yearsOfExperience: 15,
+    imageUrl: '/images/doctors/d3.webp',
     serviceIds: ['s1', 's3', 's4'],
   },
   {
@@ -110,6 +128,12 @@ export const seedDoctors: Doctor[] = [
     nameEn: 'Dr. Sara Hassan',
     specialtyAr: 'جراحة الفم والأسنان',
     specialtyEn: 'Oral surgery',
+    bioAr:
+      'متخصصة في جراحة الفم والخلع الجراحي، وتحرص على أن تكون الجلسة هادئة ومريحة قدر الإمكان.',
+    bioEn:
+      'An oral surgery specialist who keeps every procedure as calm and comfortable as possible.',
+    yearsOfExperience: 11,
+    imageUrl: '/images/doctors/d4.webp',
     serviceIds: ['s1', 's4', 's6'],
   },
 ]

@@ -1,6 +1,7 @@
 import { addMinutes } from 'date-fns'
 import { delay, http, HttpResponse } from 'msw'
 import type { Booking, BookingTime, CreateBookingInput } from '../types/booking'
+import type { ContactMessage, CreateMessageInput } from '../types/message'
 import { readDb, writeDb } from './db'
 
 export const handlers = [
@@ -9,9 +10,31 @@ export const handlers = [
     return HttpResponse.json(readDb().services)
   }),
 
+  http.get('/api/services/:id', async ({ params }) => {
+    await delay()
+
+    const service = readDb().services.find((item) => item.id === params.id)
+    if (!service) {
+      return HttpResponse.json({ message: 'Service not found' }, { status: 404 })
+    }
+
+    return HttpResponse.json(service)
+  }),
+
   http.get('/api/doctors', async () => {
     await delay()
     return HttpResponse.json(readDb().doctors)
+  }),
+
+  http.get('/api/doctors/:id', async ({ params }) => {
+    await delay()
+
+    const doctor = readDb().doctors.find((item) => item.id === params.id)
+    if (!doctor) {
+      return HttpResponse.json({ message: 'Doctor not found' }, { status: 404 })
+    }
+
+    return HttpResponse.json(doctor)
   }),
 
   http.get('/api/working-hours', async () => {
@@ -76,5 +99,22 @@ export const handlers = [
     writeDb(db)
 
     return HttpResponse.json(booking, { status: 201 })
+  }),
+
+  http.post('/api/messages', async ({ request }) => {
+    await delay()
+
+    const input = (await request.json()) as CreateMessageInput
+    const db = readDb()
+
+    const message: ContactMessage = {
+      ...input,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+    }
+    db.messages.push(message)
+    writeDb(db)
+
+    return HttpResponse.json(message, { status: 201 })
   }),
 ]
