@@ -40,15 +40,18 @@ export function ServicesList() {
     )
   }
 
-  if (services.length === 0) {
+  const activeServices = services.filter((service) => service.active)
+
+  if (activeServices.length === 0) {
     return <p className="text-center text-slate-500">{t('services.empty')}</p>
   }
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {services.map((service) => (
+      {activeServices.map((service) => (
         <ServiceCard
           key={service.id}
+          id={service.id}
           name={isArabic ? service.nameAr : service.nameEn}
           description={isArabic ? service.descriptionAr : service.descriptionEn}
           icon={service.icon}

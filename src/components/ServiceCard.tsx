@@ -1,27 +1,12 @@
-import {
-  Activity,
-  Clock,
-  ShieldPlus,
-  Sparkles,
-  Stethoscope,
-  Syringe,
-  Toothbrush,
-  type LucideIcon,
-} from 'lucide-react'
+import { Clock } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router'
 import { formatPrice } from '../lib/format'
+import { serviceIcons } from '../lib/serviceIcons'
 import type { ServiceIcon } from '../types/service'
 
-const icons: Record<ServiceIcon, LucideIcon> = {
-  checkup: Stethoscope,
-  cleaning: Toothbrush,
-  filling: ShieldPlus,
-  'root-canal': Activity,
-  whitening: Sparkles,
-  extraction: Syringe,
-}
-
 type ServiceCardProps = {
+  id: string
   name: string
   description: string
   icon: ServiceIcon
@@ -31,6 +16,7 @@ type ServiceCardProps = {
 }
 
 export function ServiceCard({
+  id,
   name,
   description,
   icon,
@@ -39,11 +25,14 @@ export function ServiceCard({
   durationMin,
 }: ServiceCardProps) {
   const { t, i18n } = useTranslation()
-  const Icon = icons[icon]
+  const Icon = serviceIcons[icon]
   const formattedPrice = formatPrice(price, i18n.language)
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10">
+    <Link
+      to={`/services/${id}`}
+      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/10"
+    >
       <div className="aspect-[8/5] overflow-hidden">
         <img
           src={imageUrl}
@@ -73,6 +62,6 @@ export function ServiceCard({
           <span className="text-base font-bold text-brand-700">{formattedPrice}</span>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
