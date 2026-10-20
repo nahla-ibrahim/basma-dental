@@ -26,11 +26,19 @@ export function Header() {
   const closeMenu = () => setIsMenuOpen(false)
 
   return (
-    <header className="sticky top-4 z-50 mx-auto mt-4 max-w-7xl px-4">
+    <header className="sticky top-4 z-50 mx-auto mt-4 w-full max-w-6xl px-4">
+      {isMenuOpen && (
+        <div
+          aria-hidden="true"
+          onClick={closeMenu}
+          className="fixed inset-0 -z-10 bg-slate-900/30 backdrop-blur-sm md:hidden"
+        />
+      )}
+
       <nav
         aria-label={t('header.nav')}
         onKeyDown={(event) => event.key === 'Escape' && closeMenu()}
-        className="rounded-2xl border border-white/60 bg-white/75 px-4 py-3 shadow-sm backdrop-blur-md md:px-6"
+        className="relative rounded-2xl border border-white/60 bg-white/75 px-4 py-3 shadow-sm backdrop-blur-md md:px-6"
       >
         <div className="flex items-center justify-between gap-4">
           <Link
@@ -77,7 +85,7 @@ export function Header() {
         {isMenuOpen && (
           <ul
             id="mobile-menu"
-            className="mt-3 space-y-1 border-t border-slate-100 pt-3 font-medium md:hidden"
+            className="absolute inset-x-0 top-full mt-2 space-y-1 rounded-2xl bg-white p-3 font-medium shadow-lg ring-1 ring-slate-900/5 md:hidden"
           >
             {links.map((link) => (
               <li key={link.to}>
