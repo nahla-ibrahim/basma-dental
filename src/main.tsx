@@ -9,14 +9,9 @@ import './i18n'
 import './index.css'
 
 async function enableMocking() {
-  const { worker } = await import('./mocks/browser')
+  const { worker, keepMockingActive } = await import('./mocks/browser')
   await worker.start({ onUnhandledFrame: 'bypass' })
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      navigator.serviceWorker.controller?.postMessage('MOCK_ACTIVATE')
-    }
-  })
+  keepMockingActive()
 }
 
 enableMocking().then(() => {
