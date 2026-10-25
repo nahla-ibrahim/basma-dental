@@ -1,32 +1,47 @@
-# React + TypeScript + Vite
+# Basma Dental
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A dental clinic booking app in Arabic and English, built with React and TypeScript.
 
-Currently, two official plugins are available:
+**Live demo:** https://basma-dental-mu.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Booking page](docs/screenshots/booking-light.webp)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 3-step booking: choose a service and doctor, pick a day and time, then enter your details
+- Available times are calculated from working hours and existing bookings
+- Arabic (RTL) and English
+- Dark mode
+- Services, doctors, about and contact pages
 
-## Expanding the Oxlint configuration
+## Tech stack
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+React 19 · TypeScript · Tailwind CSS · React Router · TanStack Query · React Hook Form · Zod · i18next · MSW · Vitest
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+There is no real backend. API requests are handled by [MSW](https://mswjs.io) in the browser, and data is saved in `localStorage`.
+
+## Notes
+
+- All requests go through one API client, so switching to a real backend only needs a new base URL.
+- Slot calculation is written as pure functions and covered by unit tests.
+- If a time gets booked by someone else first, the API returns 409 and the user picks another time.
+- Colors are theme tokens, so dark mode only changes the tokens in one CSS file, not every component.
+
+## Screenshots
+
+| Dark mode                                        | Mobile                                                                    |
+| ------------------------------------------------ | ------------------------------------------------------------------------- |
+| ![Dark mode](docs/screenshots/booking-dark.webp) | <img src="docs/screenshots/mobile-doctors.webp" alt="Mobile" width="260"> |
+
+## Run locally
+
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Run tests with `npm test`.
+
+## Credits
+
+Photos from [Unsplash](https://unsplash.com) and [Pexels](https://www.pexels.com).
